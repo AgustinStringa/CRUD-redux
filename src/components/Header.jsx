@@ -1,21 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-rpimary justify-content-between">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
         <div className="container ">
-          <h1 className="text-white p-3 ">
-            CRUD - React, Redux, REST API & Axios
-          </h1>
+          <Link to={"/"}>
+            <h1 className="text-white p-3 ">
+              CRUD - React, Redux, REST API & Axios
+            </h1>
+          </Link>
         </div>
 
-        <a
-          href="/productos/nuevo"
+        <Link
+          to="/products/new"
           className="btn btn-danger nuevo-post d-block d-md-block"
         >
           Agregar Producto +
-        </a>
+        </Link>
       </nav>
     </header>
   );
