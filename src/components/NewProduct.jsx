@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { newProductAction } from "../actions/productsActions";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"; //dispatch manda a ejecutar las acciones, selector accede al state dentro del componente
 
 const NewProduct = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //dispatch manda a llamar las funciones del accion;
 
@@ -15,6 +17,7 @@ const NewProduct = () => {
   const error = useSelector((state) => state.products.error);
   const loading = useSelector((state) => state.products.loading);
 
+  useEffect(() => {}, [error]);
   const addProduct = (productData) => dispatch(newProductAction(productData));
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +37,10 @@ const NewProduct = () => {
       productName: "",
       productPrice: "",
     });
+
+    if (!error) {
+      navigate("/");
+    }
   };
   const handleChange = (e) => {
     if (e.target.name === "productPrice") {

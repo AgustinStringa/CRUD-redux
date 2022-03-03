@@ -39,6 +39,21 @@
       "name": "asd",
       "price": 12312,
       "id": 8
+    },
+    {
+      "name": "show me how to live",
+      "price": 9000,
+      "id": 9
+    },
+    {
+      "name": "slave I",
+      "price": 14000,
+      "id": 10
+    },
+    {
+      "name": "ajshdv",
+      "price": 999,
+      "id": 11
     }
   ]
 }

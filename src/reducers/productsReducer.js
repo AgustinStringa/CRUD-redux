@@ -10,7 +10,6 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case PRODUCT_SAVED:
-            console.log(action.payload);
             return {
                 ...state,
                 loading: false,
@@ -24,7 +23,6 @@ export default function (state = initialState, action) {
                 error: true
             }
         case SUBMIT_FORM_PRODUCT:
-            console.log(action);
             return {
                 ...state,
                 loading: true,
