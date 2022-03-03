@@ -1,6 +1,8 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const EditProduct = () => {
+  const { id } = useParams(); //query to db will contain  this id
   return (
     <div className="row justify-content-center">
       <div className="col-md-8 mt-4">
