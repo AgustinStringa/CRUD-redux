@@ -11,6 +11,10 @@ const NewProduct = () => {
     productPrice: "",
   });
 
+  //taking store's state
+  const error = useSelector((state) => state.products.error);
+  const loading = useSelector((state) => state.products.loading);
+
   const addProduct = (productData) => dispatch(newProductAction(productData));
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,6 +86,13 @@ const NewProduct = () => {
                 />
               </div>
             </form>
+
+            {loading ? <p>Loading....</p> : null}
+            {error ? (
+              <p className="alert alert-danger p-2">
+                There was an error {":("}
+              </p>
+            ) : null}
           </div>
         </div>
       </div>

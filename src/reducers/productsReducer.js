@@ -28,6 +28,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loading: true,
+                error: false,
             }
         default:
             return {
