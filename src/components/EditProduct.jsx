@@ -2,18 +2,41 @@ import React from "react";
 
 const EditProduct = () => {
   return (
-    <div>
-      <h2>Edit Product </h2>
-      <form action="#">
-        <div className="form-group">
-          <label htmlFor="">Name</label>
-          <input type="text" name="" id="" />
+    <div className="row justify-content-center">
+      <div className="col-md-8 mt-4">
+        <div className="card">
+          <div className="card-body">
+            <h2 className="text-center text-uppercase">Edit product</h2>
+            <form action="#" id="formEditProduct">
+              <div className="form-group">
+                <label htmlFor="">Name</label>
+                <input
+                  type="text"
+                  name="productNewName"
+                  id=""
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="">Price</label>
+                <input
+                  type="number"
+                  name="productNewPrice"
+                  id=""
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="submit"
+                  value="Save Changes"
+                  className="form-control btn btn-block btn-primary"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="">Price</label>
-          <input type="number" name="" id="" />
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
