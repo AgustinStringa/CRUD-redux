@@ -9,12 +9,26 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        // case PRODUCT_SAVED:
-
-        // case PRODUCT_SAVED_ERROR:
-
-        // case SUBMIT_FORM_PRODUCT:
-
+        case PRODUCT_SAVED:
+            console.log(action.payload);
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                products: [...state.products, action.payload]
+            }
+        case PRODUCT_SAVED_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: true
+            }
+        case SUBMIT_FORM_PRODUCT:
+            console.log(action);
+            return {
+                ...state,
+                loading: true,
+            }
         default:
             return {
                 ...state

@@ -22,8 +22,8 @@ const NewProduct = () => {
     }
 
     addProduct({
-      productName,
-      productPrice,
+      name: productName,
+      price: productPrice,
     });
 
     setProductData({
