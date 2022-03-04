@@ -24,27 +24,18 @@ function productsReducer(state = initialState, action) {
                 products: [...state.products, action.payload]
             }
         case PRODUCT_SAVED_ERROR:
+        case GET_PRODUCTS_ERROR:
             return {
                 ...state,
                 loading: false,
                 error: true
             }
         case SUBMIT_FORM_PRODUCT:
-            return {
-                ...state,
-                loading: true,
-                error: false,
-            }
         case GET_PRODUCTS:
             return {
                 ...state,
                 loading: true,
-            }
-        case GET_PRODUCTS_ERROR:
-            return {
-                ...state,
-                error: true,
-                loading: false,
+                error: false,
             }
         case GET_PRODUCTS_SUCCESS:
             return {

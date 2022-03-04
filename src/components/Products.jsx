@@ -40,7 +40,7 @@ const Products = () => {
             ? products.map((prod) => (
                 <tr key={prod.id}>
                   <td>{prod.name}</td>
-                  <td>{prod.price}</td>
+                  <td>$ {prod.price}</td>
                   <td className="">
                     <Link
                       to={`/products/edit/${prod.id}`}
@@ -48,9 +48,9 @@ const Products = () => {
                     >
                       Edit
                     </Link>
-                    <Link to="/" className="btn btn-danger mx-2">
+                    <button type="button" className="btn btn-danger mx-2">
                       Delete
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))
