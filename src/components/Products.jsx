@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
-import { getProductsAction } from "../actions/productsActions";
+import {
+  getProductsAction,
+  deleteProductAction,
+} from "../actions/productsActions";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -13,6 +17,22 @@ const Products = () => {
     dispatch(getProductsAction());
   }, []);
   useEffect(() => {}, [products, error]);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProductAction(id));
+      }
+    });
+  };
   return (
     <div className="row justify-content-center my-5">
       <h2 className="text-center text-uppercase">Product List</h2>
@@ -48,7 +68,13 @@ const Products = () => {
                     >
                       Edit
                     </Link>
-                    <button type="button" className="btn btn-danger mx-2">
+                    <button
+                      type="button"
+                      className="btn btn-danger mx-2"
+                      onClick={() => {
+                        handleDelete(prod.id);
+                      }}
+                    >
                       Delete
                     </button>
                   </td>

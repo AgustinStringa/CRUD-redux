@@ -5,7 +5,10 @@ import {
     PRODUCT_SAVED_ERROR,
     SUBMIT_FORM_PRODUCT,
     GET_PRODUCTS_ERROR,
-    GET_PRODUCTS_SUCCESS
+    GET_PRODUCTS_SUCCESS,
+    DELETE_PRODUCT,
+    DELETE_PRODUCT_ERROR,
+    DELETE_PRODUCT_SUCCESS
 } from '../types/index';
 
 const initialState = {
@@ -32,6 +35,7 @@ function productsReducer(state = initialState, action) {
             }
         case SUBMIT_FORM_PRODUCT:
         case GET_PRODUCTS:
+        case DELETE_PRODUCT:
             return {
                 ...state,
                 loading: true,
@@ -43,6 +47,18 @@ function productsReducer(state = initialState, action) {
                 error: false,
                 loading: false,
                 products: action.payload,
+            }
+        case DELETE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                error: false,
+                loading: false,
+                products: state.products.filter((prod) => prod.id !== action.payload)
+            }
+        case DELETE_PRODUCT_ERROR:
+            return {
+                ...state,
+                loading: false,
             }
         default:
             return {

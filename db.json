@@ -6,11 +6,6 @@
       "price": "31111"
     },
     {
-      "id": 2,
-      "name": "Jugo de Naranja",
-      "price": "1"
-    },
-    {
       "name": "Jugo de Naranja",
       "price": "300",
       "id": 3
@@ -24,41 +19,6 @@
       "name": "Jugo de Fresa",
       "price": "200",
       "id": 5
-    },
-    {
-      "name": "pollo",
-      "price": 337,
-      "id": 6
-    },
-    {
-      "name": "asd",
-      "price": 1213123,
-      "id": 7
-    },
-    {
-      "name": "asd",
-      "price": 12312,
-      "id": 8
-    },
-    {
-      "name": "show me how to live",
-      "price": 9000,
-      "id": 9
-    },
-    {
-      "name": "slave I",
-      "price": 14000,
-      "id": 10
-    },
-    {
-      "name": "ajshdv",
-      "price": 999,
-      "id": 11
-    },
-    {
-      "name": "polenta",
-      "price": 300,
-      "id": 12
     }
   ]
 }
