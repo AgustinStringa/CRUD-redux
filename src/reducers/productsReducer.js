@@ -1,5 +1,12 @@
 //este reducer recibe el state y la accion desde el store
-import { PRODUCT_SAVED, PRODUCT_SAVED_ERROR, SUBMIT_FORM_PRODUCT } from '../types/index';
+import {
+    GET_PRODUCTS,
+    PRODUCT_SAVED,
+    PRODUCT_SAVED_ERROR,
+    SUBMIT_FORM_PRODUCT,
+    GET_PRODUCTS_ERROR,
+    GET_PRODUCTS_SUCCESS
+} from '../types/index';
 
 const initialState = {
     products: [],
@@ -7,7 +14,7 @@ const initialState = {
     loading: false,
 }
 
-export default function (state = initialState, action) {
+function productsReducer(state = initialState, action) {
     switch (action.type) {
         case PRODUCT_SAVED:
             return {
@@ -28,9 +35,29 @@ export default function (state = initialState, action) {
                 loading: true,
                 error: false,
             }
+        case GET_PRODUCTS:
+            return {
+                ...state,
+                loading: true,
+            }
+        case GET_PRODUCTS_ERROR:
+            return {
+                ...state,
+                error: true,
+                loading: false,
+            }
+        case GET_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                error: false,
+                loading: false,
+                products: action.payload,
+            }
         default:
             return {
                 ...state
             }
     }
 }
+
+export default productsReducer;

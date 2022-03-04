@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getProductsAction } from "../actions/productsActions";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Products = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.products);
+  const error = useSelector((state) => state.products.error);
+  const loading = useSelector((state) => state.products.loading);
+
+  useEffect(() => {
+    dispatch(getProductsAction());
+  }, []);
+  useEffect(() => {}, [products, error]);
   return (
     <div className="row justify-content-center my-5">
       <h2 className="text-center text-uppercase">Product List</h2>
@@ -13,7 +25,45 @@ const Products = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {loading ? (
+            <tr>
+              <td
+                className="p-5 text-center text-black font-weight-bold bg-gray"
+                colSpan={3}
+              >
+                Loading...
+              </td>
+            </tr>
+          ) : null}
+          {products.length > 0 && !error && !loading
+            ? products.map((prod) => (
+                <tr key={prod.id}>
+                  <td>{prod.name}</td>
+                  <td>{prod.price}</td>
+                  <td className="">
+                    <Link
+                      to={`/products/edit/${prod.id}`}
+                      className="btn btn-primary mx-2"
+                    >
+                      Edit
+                    </Link>
+                    <Link to="/" className="btn btn-danger mx-2">
+                      Delete
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            : null}
+
+          {error && !loading ? (
+            <tr>
+              <td className="alert alert-danger p-5 text-center " colSpan={3}>
+                Error loading products. Check your connection or JSON-SERVER API
+              </td>
+            </tr>
+          ) : null}
+        </tbody>
         <tfoot className="table-dark bg-primary">
           <tr className="font-weight-bold">
             <td>Name</td>

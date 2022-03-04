@@ -1,6 +1,13 @@
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';
-import { PRODUCT_SAVED, PRODUCT_SAVED_ERROR, SUBMIT_FORM_PRODUCT } from '../types/index';
+import {
+    PRODUCT_SAVED,
+    PRODUCT_SAVED_ERROR,
+    SUBMIT_FORM_PRODUCT,
+    GET_PRODUCTS,
+    GET_PRODUCTS_ERROR,
+    GET_PRODUCTS_SUCCESS
+} from '../types/index';
 
 export function newProductAction(productData) {
     return (async (dispatch) => {
@@ -19,6 +26,22 @@ export function newProductAction(productData) {
             const productSavedError = () => ({ type: PRODUCT_SAVED_ERROR })
             dispatch(productSavedError());
             Swal.fire('Error', 'Error at db inserction', 'error');
+        }
+    })
+}
+
+export function getProductsAction() {
+    return (async (dispatch) => {
+        try {
+            const products = () => ({ type: GET_PRODUCTS });
+            dispatch(products());
+            const res = await axiosClient.get('/products');
+            const productsSuccess = () => ({ type: GET_PRODUCTS_SUCCESS, payload: res.data });
+            dispatch(productsSuccess());
+        } catch (error) {
+            console.log(error);
+            const productsError = () => ({ type: GET_PRODUCTS_ERROR });
+            dispatch(productsError())
         }
     })
 }
