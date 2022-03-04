@@ -9,7 +9,13 @@ import {
     GET_PRODUCTS_SUCCESS,
     DELETE_PRODUCT,
     DELETE_PRODUCT_ERROR,
-    DELETE_PRODUCT_SUCCESS
+    DELETE_PRODUCT_SUCCESS,
+    GET_PRODUCT_DATA,
+    GET_PRODUCT_DATA_SUCCESS,
+    GET_PRODUCT_DATA_ERROR,
+    SAVE_PRODUCT_DATA,
+    SAVE_PRODUCT_DATA_ERROR,
+    SAVE_PRODUCT_DATA_SUCCESS
 } from '../types/index';
 
 export function newProductAction(productData) {
@@ -20,9 +26,9 @@ export function newProductAction(productData) {
         try {
             //el retorno de la funcion que se invoca en el dispatch es el action
             //por tanto, PRODUCT_SAVED se encuentra en action.type
-            await axiosClient.post('/products', productData);
-            const productSaved = (productData) => ({ type: PRODUCT_SAVED, payload: productData })
-            dispatch(productSaved(productData));
+            const res = await axiosClient.post('/products', productData);
+            const productSaved = () => ({ type: PRODUCT_SAVED, payload: res.data })
+            dispatch(productSaved());
             Swal.fire('Product Saved', `Your new product "${productData.name}" was created successfully`, 'success');
         } catch (error) {
             console.log(error)
@@ -56,15 +62,49 @@ export function deleteProductAction(id) {
             dispatch(deleteProduct());
             await axiosClient.delete(`/products/${id}`);
             //llamar de nuevo a la api y cargar los productos o filtrar y eliminar el que tiene el id
-            setTimeout(() => {
-                const deleteProductSuccess = () => ({ type: DELETE_PRODUCT_SUCCESS, payload: id });
-                dispatch(deleteProductSuccess());
-            }, 2000)
+            const deleteProductSuccess = () => ({ type: DELETE_PRODUCT_SUCCESS, payload: id });
+            dispatch(deleteProductSuccess());
         } catch (error) {
             console.log(error);
             const deleteProductError = () => ({ type: DELETE_PRODUCT_ERROR })
             dispatch(deleteProductError());
             Swal.fire('Error', 'Error at delete', 'error');
+        }
+    })
+}
+
+export function getProductDataAction(id) {
+    return (async (dispatch) => {
+        try {
+            const getProductData = () => ({ type: GET_PRODUCT_DATA });
+            dispatch(getProductData());
+            const res = await axiosClient.get(`/products/${id}`);
+            const getProductDataSuccess = () => ({ type: GET_PRODUCT_DATA_SUCCESS, payload: res.data });
+            dispatch(getProductDataSuccess());
+
+        } catch (error) {
+            console.log(error);
+            const getProductDataError = () => ({ type: GET_PRODUCT_DATA_ERROR });
+            dispatch(getProductDataError());
+        }
+    })
+}
+
+export function saveProductDataAction(dataProduct, idProduct) {
+    return (async (dispatch) => {
+        try {
+            const saveProductData = () => ({ type: SAVE_PRODUCT_DATA });
+            dispatch(saveProductData());
+            await axiosClient.put(`products/${idProduct}`, dataProduct);
+            const newProduct = dataProduct;
+            newProduct.id = idProduct;
+            const saveProductDataSuccess = () => ({ type: SAVE_PRODUCT_DATA_SUCCESS, payload: newProduct })
+            dispatch(saveProductDataSuccess());
+        } catch (error) {
+            console.log(error);
+            Swal.fire("Error at updating", "Please try again", "error");
+            const saveProductDataError = () => ({ type: SAVE_PRODUCT_DATA_ERROR });
+            dispatch(saveProductDataError());
         }
     })
 }

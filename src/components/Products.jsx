@@ -15,6 +15,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(getProductsAction());
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {}, [products, error]);
 
@@ -61,7 +62,7 @@ const Products = () => {
                 <tr key={prod.id}>
                   <td>{prod.name}</td>
                   <td>$ {prod.price}</td>
-                  <td className="">
+                  <td>
                     <Link
                       to={`/products/edit/${prod.id}`}
                       className="btn btn-primary mx-2"
